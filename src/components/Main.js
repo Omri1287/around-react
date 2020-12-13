@@ -51,7 +51,10 @@ function Main(props) {
         <section className="elements">
             <ul className="elements__list">
             {cards.map((card) => 
-                <Card key={card._id} src={card.link} title={card.name} likes={card.likes.length} owner={card.owner} />
+                <Card key={card._id} src={card.link} title={card.name} likes={card.likes.length} owner={card.owner}
+                handleDeleteClick={(card) => props.handleDeleteClick(card.link, card.name)}
+                onCardClick={() => props.handleCardClick(card)}
+                />
             )}
             </ul>
         </section>
