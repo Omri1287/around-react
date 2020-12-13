@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import jacques from "../images/jacques-cousteau.jpg";
-import {api} from '../Utils/Api'
-import {Api} from '../Utils/Api'
+import api from '../Utils/Api'
 import Card from './Card'
 
 function Main(props) {
