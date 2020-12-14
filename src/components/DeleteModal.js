@@ -3,8 +3,7 @@ import PopupWithForm from './PopupWithForm'
 
 function DeleteModal(props){
     return(
-        <PopupWithForm name="delete" buttonText="Yes" isOpen={props.isOpen} onClose={props.onClose}>
-            <h2 className="modal__title">Are You Sure?</h2>
+        <PopupWithForm name="delete" buttonText="Yes" title="Are you sure?" isOpen={props.isOpen} onClose={props.onClose}>
         </PopupWithForm>        
     )
 

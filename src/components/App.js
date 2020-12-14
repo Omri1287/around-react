@@ -58,9 +58,7 @@ function App() {
             handleDeleteClick = {() => {
               handleDeleteClick();
             }}
-            handleCardClick ={(data) => {
-              handleCardClick(data);
-            }}
+            handleCardClick ={handleCardClick}
         />
         <Footer />
         <EditProfileModal isOpen ={editProfileModalOpen} onClose={closeAllPopups} />

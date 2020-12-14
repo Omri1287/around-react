@@ -3,7 +3,7 @@
 @import url('./__image/elements__image.css');
 @import url('./__heart/elements__heart.css');
 @import url('./__container/elements__container.css');
-@import url('./__delete/elements__delete.css');
+@import url('./__item/_delete/elements__item_delete.css');
 @import url('./__image-container/elements__image-container.css');
 @import url('./__heart/_active/elements__heart_active.css');
 @import url('./__list/elements__list.css');

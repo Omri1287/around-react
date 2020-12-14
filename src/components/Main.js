@@ -53,7 +53,7 @@ function Main(props) {
             {cards.map((card) => 
                 <Card key={card._id} src={card.link} title={card.name} likes={card.likes.length} owner={card.owner}
                 handleDeleteClick={() => props.handleDeleteClick()}
-                onCardClick={() => props.handleCardClick(card.link, card.name)}
+                handleCardClick={props.handleCardClick}
                 />
             )}
             </ul>
