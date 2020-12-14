@@ -4,10 +4,10 @@ import api from '../Utils/Api'
 import Card from './Card'
 
 function Main(props) {
-  const [userName, setUserName] = useState("")
-  const [userDescription,setUserDescription] = useState("")
-  const [userAvatar, setUserAvatar] = useState("")
-  const [cards, setCards] = useState([])
+  const [userName, setUserName] = React.useState({})
+  const [userDescription,setUserDescription] = React.useState({})
+  const [userAvatar, setUserAvatar] = React.useState({})
+  const [cards, setCards] = React.useState([])
   useEffect(() => {
     api.getUserInfo()
     .then((res) => {
@@ -52,8 +52,8 @@ function Main(props) {
             <ul className="elements__list">
             {cards.map((card) => 
                 <Card key={card._id} src={card.link} title={card.name} likes={card.likes.length} owner={card.owner}
-                handleDeleteClick={(card) => props.handleDeleteClick(card.link, card.name)}
-                onCardClick={() => props.handleCardClick(card)}
+                handleDeleteClick={() => props.handleDeleteClick()}
+                onCardClick={() => props.handleCardClick(card.link, card.name)}
                 />
             )}
             </ul>

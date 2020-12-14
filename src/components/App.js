@@ -15,6 +15,9 @@ function App() {
   const [addImageModalOpen, setAddImageModalOpen] = React.useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(false)
+  const [imageLink, setImageLink] = React.useState("")
+  const [imageTitle, setImageTitle] = React.useState("")
+
 
   function handleEditProfileClick(){
     setEditProfileModalOpen(true);
@@ -28,8 +31,10 @@ function App() {
   function handleDeleteClick(){
     setDeleteModalOpen(true);
   }
-  function handleCardClick() {
+  function handleCardClick(link, title) {
     setSelectedCard(true)
+    setImageLink(link)
+    setImageTitle(title)
   }
   function closeAllPopups(){
     setEditProfileModalOpen(false)
@@ -50,11 +55,11 @@ function App() {
             handleEditProfileClick = {handleEditProfileClick}
             handleEditAvatarClick = {handleEditAvatarClick}
             handleAddPlaceClick={handleAddPlaceClick}
-            handleDeleteClick = {(card) => {
-              handleDeleteClick(card);
+            handleDeleteClick = {() => {
+              handleDeleteClick();
             }}
-            handleCardClick ={(card) => {
-              handleCardClick(card);
+            handleCardClick ={(data) => {
+              handleCardClick(data);
             }}
         />
         <Footer />
@@ -62,7 +67,7 @@ function App() {
         <EditAvatarModal isOpen={editAvatarModalOpen} onClose={closeAllPopups} />
         <AddImageModal isOpen={addImageModalOpen} onClose={closeAllPopups} />
         <DeleteModal isOpen={deleteModalOpen} onClose={closeAllPopups} />
-        <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} />
+        <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} link={imageLink} title={imageTitle} />
     </div>  
   );
 }
