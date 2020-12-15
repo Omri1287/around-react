@@ -14,7 +14,7 @@ function App() {
   const [editAvatarModalOpen, setEditAvatarModalOpen] = React.useState(false);
   const [addImageModalOpen, setAddImageModalOpen] = React.useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(false)
+  const [selectedCard, setSelectedCard] = React.useState(null)
   const [imageLink, setImageLink] = React.useState("")
   const [imageTitle, setImageTitle] = React.useState("")
 
@@ -32,20 +32,20 @@ function App() {
     setDeleteModalOpen(true);
   }
   function handleCardClick(link, title) {
-    setSelectedCard(true)
-    setImageLink(link)
-    setImageTitle(title)
+    setSelectedCard({link, title})
+    // setImageLink(link)
+    // setImageTitle(title)
   }
   function closeAllPopups(){
     setEditProfileModalOpen(false)
     setDeleteModalOpen(false)
     setAddImageModalOpen(false)
     setEditAvatarModalOpen(false)
-    setSelectedCard(false)
+    setSelectedCard(null)
   }
   return (
     <div className="page">
-        <Header/ >
+        <Header />
         <Main
             editProfileModalOpen={editProfileModalOpen}
             editAvatarModalOpen={editAvatarModalOpen}

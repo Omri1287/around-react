@@ -4,9 +4,9 @@ import api from '../Utils/Api'
 import Card from './Card'
 
 function Main(props) {
-  const [userName, setUserName] = React.useState({})
-  const [userDescription,setUserDescription] = React.useState({})
-  const [userAvatar, setUserAvatar] = React.useState({})
+  const [userName, setUserName] = React.useState("")
+  const [userDescription,setUserDescription] = React.useState("")
+  const [userAvatar, setUserAvatar] = React.useState("")
   const [cards, setCards] = React.useState([])
   useEffect(() => {
     api.getUserInfo()
