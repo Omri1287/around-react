@@ -10,7 +10,7 @@ function Main(props) {
 //   const [userDescription,setUserDescription] = React.useState("")
 //   const [userAvatar, setUserAvatar] = React.useState("")
   const currentUser = React.useContext(currentUserContext);
-  const [cards, setCards] = React.useState([])
+  //const [cards, setCards] = React.useState([])
 
 //   useEffect(() => {
 //     api.getUserInfo()
@@ -36,18 +36,7 @@ function Main(props) {
 //     })
 //     .catch((err) => console.log(err));
 //   }, [])
-  function handleCardLike(card) {
-    // Check one more time if this card was already liked
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
-    // Send a request to the API and getting the updated card data
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-        // Create a new array based on the existing one and putting a new card into it
-      const newCards = cards.map((c) => c._id === card._id ? newCard : c);
-      // Update the state
-      setCards(newCards);
-    });
-  } 
+
     return (
         <main className="content">
             <section className="profile">
@@ -67,12 +56,12 @@ function Main(props) {
             </section>
             <section className="elements">
                 <ul className="elements__list">
-                {cards.map((card) => 
-                    <Card key={card._id} src={card.link} title={card.name} likes={card.likes.length} owner={card.owner}
+                {props.cards.map((card) => 
+                    <Card key={card._id} src={card.link} title={card.name} likes={card.likes} owner={card.owner}
                     //handleDeleteClick={() => props.handleDeleteClick()}
-                    handleCardClick={props.handleCardClick}
+                    OnCardClick={props.handleCardClick}
                     onDeleteClick={(card) => props.handleDeleteClick(card)}
-                    onLikeClick={(card) => props.handleCardLike(card)}
+                    onCardLike={(card) => props.handleCardLike(card)}
                     /> 
                 )}
                 </ul>

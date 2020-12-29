@@ -21,7 +21,7 @@ function Card(props){
     function deleteCard() {
         props.onDeleteClick(props.card)
     }
-    function handleCardLike(){  
+    function handleLike(){  
         props.onCardLike(props.card)
     }
     function handleCardClick() {
@@ -34,8 +34,8 @@ function Card(props){
                         <div id="title-container" className="elements__container">
                             <h2 className="elements__title">{props.title}</h2>
                             <div className="elements__heart-container">
-                                <button className="elements__heart" onClick={handleCardLike}></button>
-                                <p className="elements__heart-count">{props.likes}</p>
+                                <button className="elements__heart" onClick={handleLike}></button>
+                                <p className="elements__heart-count">{props.likes.length}</p>
                             </div>
                         </div>
                 </li>
