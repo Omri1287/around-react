@@ -53,30 +53,42 @@ function App() {
   function handleAddPlaceClick(){
     setAddImageModalOpen(true)
   }
-  function handleDeleteClick(){
-    setDeleteModalOpen(true);
-  }
+
   function handleCardClick(link, title) {
     //({link, title})
     setImageLink(link)
     setImageTitle(title)
   }
-
+  function handleDeleteClick(card){
+    console.log(card)
+    api.removeCard(card._id)
+    .then(() => {
+      console.log(card._id)
+      const cardList = cards.filter((c) => (c._id !== card._id))
+      setCards(cardList);
+    })
+    .catch((err) => console.log(err));
+  }
   function handleCardLike(card) {
     // Check one more time if this card was already liked
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
-    // Send a request to the API and getting the updated card data
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-        // Create a new array based on the existing one and putting a new card into it
+    let tempRes
+    if(isLiked === false){
+      tempRes =api.addLike(card._id)
+    }
+    else{
+      tempRes = api.deleteLike(card._id)
+    }
+    tempRes
+    .then((newCard) => {
       const newCards = cards.map((c) => c._id === card._id ? newCard : c);
       // Update the state
       setCards(newCards);
-    });
+    })
+    .catch((err) => console.log(err));
   } 
 
   function handleUpdateUser({name, about}){
-    console.log({name, about})
     api.setUserInfo({name, about})
     .then((res) =>{
       console.log(res)
@@ -119,8 +131,7 @@ function App() {
               handleEditAvatarClick = {handleEditAvatarClick}
               handleAddPlaceClick={handleAddPlaceClick}
               onDeleteClick = {(card) => {
-                handleDeleteClick(card);
-              }}
+                handleDeleteClick(card)}}
               OnCardClick = {(data) => {
                 handleCardClick(data)}}
               onCardLike = {(card) => {
