@@ -1,7 +1,6 @@
 import React from 'react';
 
 function ImagePopup(props){
-        console.log(props.title)
     return(
         
         <div className={`modal modal_type_image ${props.isOpen ? "modal_is-open" : ""}`}>
