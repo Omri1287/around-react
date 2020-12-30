@@ -60,18 +60,17 @@ function App() {
     setImageTitle(title)
   }
   function handleDeleteClick(card){
-    console.log(card)
     api.removeCard(card._id)
     .then(() => {
-      console.log(card._id)
       const cardList = cards.filter((c) => (c._id !== card._id))
       setCards(cardList);
     })
     .catch((err) => console.log(err));
   }
   function handleCardLike(card) {
+    console.log(card)
     // Check one more time if this card was already liked
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
     let tempRes
     if(isLiked === false){
       tempRes =api.addLike(card._id)
@@ -117,8 +116,8 @@ function App() {
     setSelectedCard(null)
   }
   return (
-    <currentUserContext.Provider value={currentUser}>
       <div className="page">
+        <currentUserContext.Provider value={currentUser}>
           <Header />
           <Main
               cards={cards}
@@ -130,11 +129,12 @@ function App() {
               handleEditProfileClick = {handleEditProfileClick}
               handleEditAvatarClick = {handleEditAvatarClick}
               handleAddPlaceClick={handleAddPlaceClick}
-              onDeleteClick = {(card) => {
+              handleDeleteClick = {(card) => {
+                console.log(card)
                 handleDeleteClick(card)}}
-              OnCardClick = {(data) => {
-                handleCardClick(data)}}
-              onCardLike = {(card) => {
+              handleCardClick = {(card) => {
+                handleCardClick(card)}}
+              handleCardLike = {(card) => {
                 handleCardLike(card)
               }}
           />
@@ -145,8 +145,8 @@ function App() {
           <AddImageModal isOpen={addImageModalOpen} onClose={closeAllPopups} />
           <DeleteModal isOpen={deleteModalOpen} onClose={closeAllPopups} />
           <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} link={imageLink} title={imageTitle} />
+        </currentUserContext.Provider>
       </div>  
-    </currentUserContext.Provider>
   );
 }
 
