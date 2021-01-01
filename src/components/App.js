@@ -18,6 +18,7 @@ function App() {
   const [editAvatarModalOpen, setEditAvatarModalOpen] = React.useState(false);
   const [addImageModalOpen, setAddImageModalOpen] = React.useState(false);
   const [deleteModalOpen, setDeleteModalOpen ] = React.useState(false);
+  const [enlargeImage, setEnlargeImage] = useState(false)
   const [selectedCard, setSelectedCard] = React.useState(null)
   const [imageLink, setImageLink] = React.useState("")
   const [imageTitle, setImageTitle] = React.useState("")
@@ -55,20 +56,26 @@ function App() {
   }
 
   function handleCardClick(link, title) {
+    setEnlargeImage(true)
     //({link, title})
     setImageLink(link)
     setImageTitle(title)
   }
   function handleDeleteClick(card){
+    console.log(card._id)
+    console.log(currentUser._id === card.owner._id)
+
     api.removeCard(card._id)
     .then(() => {
-      const cardList = cards.filter((c) => (c._id !== card._id))
+      const cardList = cards.filter((c) => {
+        console.log(card._id)
+        console.log(c._id)
+        (c._id !== card._id)})
       setCards(cardList);
     })
     .catch((err) => console.log(err));
   }
   function handleCardLike(card) {
-    console.log(card)
     // Check one more time if this card was already liked
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     let tempRes
@@ -108,12 +115,21 @@ function App() {
     })
     .catch((err) => console.log(err));
   }
+   function handleAddPlaceSubmit({name, link}) {
+     api.addCard({name, link})
+     .then((newCard) => {
+       setCards([newCard,...cards])
+     })
+     .then(() => setAddImageModalOpen(false))
+     .catch((err) => console.log(err))
+   }
   function closeAllPopups(){
     setEditProfileModalOpen(false)
     setDeleteModalOpen(false)
     setAddImageModalOpen(false)
     setEditAvatarModalOpen(false)
     setSelectedCard(null)
+    setEnlargeImage(false)
   }
   return (
       <div className="page">
@@ -132,19 +148,18 @@ function App() {
               handleDeleteClick = {(card) => {
                 console.log(card)
                 handleDeleteClick(card)}}
-              handleCardClick = {(card) => {
-                handleCardClick(card)}}
+              handleCardClick = {(data) => {
+                handleCardClick(data)}}
               handleCardLike = {(card) => {
                 handleCardLike(card)
               }}
           />
-          <Footer />
           <EditProfileModal isOpen ={editProfileModalOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
           <EditAvatarModal isOpen={editAvatarModalOpen} onClose={closeAllPopups} onUpdateAvatar = {handleUpdateAvatar}
  />
-          <AddImageModal isOpen={addImageModalOpen} onClose={closeAllPopups} />
+          <AddImageModal isOpen={addImageModalOpen} onClose={closeAllPopups} handleAddPlaceSubmit={handleAddPlaceSubmit} />
           <DeleteModal isOpen={deleteModalOpen} onClose={closeAllPopups} />
-          <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} link={imageLink} title={imageTitle} />
+          <ImagePopup isOpen={enlargeImage} onClose={closeAllPopups} link={imageLink} title={imageTitle} />
         </currentUserContext.Provider>
       </div>  
   );

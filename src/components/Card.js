@@ -17,7 +17,7 @@ function Card(props){
 
     // Create a variable which you then set in `className` for the like button
     
-    const cardLikeButtonClassName = `elements__heart $(isLiked? "elements__heart_active": "elements__heart")`; 
+    const cardLikeButtonClassName = `elements__heart ${isLiked? "elements__heart_active": "elements__heart"}`; 
     // function deleteCard(){
     //     props.onDeleteClick(props.card)
     // }
@@ -35,7 +35,7 @@ function Card(props){
                         <div id="title-container" className="elements__container">
                             <h2 className="elements__title">{props.title}</h2>
                             <div className="elements__heart-container">
-                                <button className="elements__heart" onClick={() => {props.handleCardLike(props.card)}}></button>
+                                <button type="button" className={cardLikeButtonClassName} onClick={() => {props.handleCardLike(props.card)}}></button>
                                 <p className="elements__heart-count">{props.likes.length}</p>
                             </div>
                         </div>
