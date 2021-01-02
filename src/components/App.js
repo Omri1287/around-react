@@ -22,7 +22,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null)
   const [imageLink, setImageLink] = React.useState("")
   const [imageTitle, setImageTitle] = React.useState("")
-  const [currentUser, setCurrentUser] = React.useState("")
+  const [currentUser, setCurrentUser] = React.useState({})
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -74,14 +74,14 @@ function App() {
   function handleCardLike(card) {
     // Check one more time if this card was already liked
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    let tempRes
+    let likeStatus
     if(isLiked === false){
-      tempRes =api.addLike(card._id)
+      likeStatus =api.addLike(card._id)
     }
     else{
-      tempRes = api.deleteLike(card._id)
+      likeStatus = api.deleteLike(card._id)
     }
-    tempRes
+    likeStatus
     .then((newCard) => {
       const newCards = cards.map((c) => c._id === card._id ? newCard : c);
       // Update the state
