@@ -30,8 +30,8 @@ function Card(props){
     // }
     return(
                 <li className="elements__item">
-                        <img className="elements__image" src={props.src} alt={props.title} onClick={() => {props.handleCardClick(props.card)}}/>
-                        <button className="elements__item_delete elements__item_delete_show" onClick={() => {props.handleDeleteClick(props.card)}}></button>
+                        <img className="elements__image" src={props.src} alt={props.title} onClick={() => {props.handleCardClick(props.src, props.title)}}/>
+                        <button className={cardDeleteButtonClassName} onClick={() => {props.handleDeleteClick(props.card)}}></button>
                         <div id="title-container" className="elements__container">
                             <h2 className="elements__title">{props.title}</h2>
                             <div className="elements__heart-container">

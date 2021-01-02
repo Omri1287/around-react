@@ -62,15 +62,11 @@ function App() {
     setImageTitle(title)
   }
   function handleDeleteClick(card){
-    console.log(card._id)
     console.log(currentUser._id === card.owner._id)
 
     api.removeCard(card._id)
     .then(() => {
-      const cardList = cards.filter((c) => {
-        console.log(card._id)
-        console.log(c._id)
-        (c._id !== card._id)})
+      const cardList = cards.filter((c) => (c._id !== card._id))
       setCards(cardList);
     })
     .catch((err) => console.log(err));
@@ -148,8 +144,7 @@ function App() {
               handleDeleteClick = {(card) => {
                 console.log(card)
                 handleDeleteClick(card)}}
-              handleCardClick = {(data) => {
-                handleCardClick(data)}}
+              handleCardClick = {handleCardClick}
               handleCardLike = {(card) => {
                 handleCardLike(card)
               }}
